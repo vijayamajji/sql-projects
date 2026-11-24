@@ -25,7 +25,6 @@ Year Q1 Q2 Q3 Q4
 
 ANSWER:
 
-```sql
 SQL
 SELECT
 Year,
@@ -54,19 +53,17 @@ FROM Sales
 GROUP BY Year
 ORDER BY Year;
 
-```
 Question: Write an alternative query for FULL OUTER JOIN
 
-```sql
 SELECT *
 FROM A
 FULL OUTER JOIN B
 ON A.X = B.Y;
-```
+
 
 Answer: Using LEFT JOIN, RIGHT JOIN and UNION
 
-```sql
+
 
 SELECT *
 FROM A
@@ -79,6 +76,6 @@ SELECT *
 FROM A
 RIGHT JOIN B
 ON A.X = B.Y;
-```
+
 UNION removes the duplicate matching rows, giving the equivalent FULL OUTER JOIN result.
 
