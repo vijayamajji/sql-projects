@@ -1,1 +1,84 @@
+QUESTION: Convert Quarter rows into columns and calculate total sales for each Year and Quarter. Display 'NA' when sales are NULL.
+
+Input:
+
+Plain Text
+Year Quarter Sales
+2020 Q1 90
+2020 Q1 10
+2020 Q2 70
+2020 Q3 130
+2020 Q3 20
+2020 Q4 NULL
+2021 Q1 40
+2021 Q2 NULL
+2021 Q3 120
+2021 Q4 20
+ 
+
+Required Output:
+
+Plain Text
+Year Q1 Q2 Q3 Q4
+2020 100 70 150 NA
+2021 40 NA 120 20
+
+ANSWER:
+
+```sql
+SQL
+SELECT
+Year,
+ 
+COALESCE(
+CAST(SUM(CASE WHEN Quarter = 'Q1' THEN Sales END) AS VARCHAR(20)),
+'NA'
+) AS Q1,
+ 
+COALESCE(
+CAST(SUM(CASE WHEN Quarter = 'Q2' THEN Sales END) AS VARCHAR(20)),
+'NA'
+) AS Q2,
+ 
+COALESCE(
+CAST(SUM(CASE WHEN Quarter = 'Q3' THEN Sales END) AS VARCHAR(20)),
+'NA'
+) AS Q3,
+ 
+COALESCE(
+CAST(SUM(CASE WHEN Quarter = 'Q4' THEN Sales END) AS VARCHAR(20)),
+'NA'
+) AS Q4
+ 
+FROM Sales
+GROUP BY Year
+ORDER BY Year;
+
+```
+Question: Write an alternative query for FULL OUTER JOIN
+
+```sql
+SELECT *
+FROM A
+FULL OUTER JOIN B
+ON A.X = B.Y;
+```
+
+Answer: Using LEFT JOIN, RIGHT JOIN and UNION
+
+```sql
+
+SELECT *
+FROM A
+LEFT JOIN B
+ON A.X = B.Y
+ 
+UNION
+ 
+SELECT *
+FROM A
+RIGHT JOIN B
+ON A.X = B.Y;
+```
+UNION removes the duplicate matching rows, giving the equivalent FULL OUTER JOIN result.
 
